@@ -19,7 +19,7 @@
 .inner {
     height: 100%;
     width: var(--default-layout-width);
-    padding: 0 var(--default-layout-horizontal-spacer);
+    padding: 0 24px 0 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -30,33 +30,53 @@
 }
 
 // Actions
-.actions {
+.action {
     display: flex;
     align-items: center;
-}
 
-.more-btn {
-    font-size: 2rem;
-    margin-left: 28px;
-    padding: 4px 8px;
-    background-color: transparent;
-    cursor: pointer;
-}
+    &-btn {
+        position: relative;
+        display: flex;
+        font-size: 2.2rem;
+        color: #161823;
+        background-color: transparent;
+        padding: 4px 0;
+        margin-left: 19px;
+        cursor: pointer;
+    }
 
-.action-btn {
-    position: relative;
-    display: flex;
-    font-size: 2.2rem;
-    color: #161823;
-    background-color: transparent;
-    padding: 4px 10px;
-    cursor: pointer;
+    &-upload {
+        display: flex;
+        align-items: center;
+        border-color: rgba(22, 24, 35, 0.12);
+        border-radius: 2px;
+        padding: 7px 16px;
+        background-color: var(--white);
+
+        & span {
+            font-weight: 600;
+        }
+
+        &:hover {
+            background-color: rgba(22, 24, 35, 0.03);
+        }
+    }
+
+    &-threeDots {
+        margin-top: 4px;
+        background-color: transparent;
+        & svg {
+            margin-left: 20px;
+            margin-right: 4px;
+            cursor: pointer;
+        }
+    }
 }
 
 .badge {
     position: absolute;
     top: -3px;
-    right: 0px;
+    right: -8px;
     padding: 0px 6px;
     height: 2rem;
     line-height: 2rem;
@@ -73,6 +93,6 @@
     height: 32px;
     object-fit: cover;
     border-radius: 50%;
-    margin-left: 14px;
+    margin-left: 24px;
     cursor: pointer;
 }

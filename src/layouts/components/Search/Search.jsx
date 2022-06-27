@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
 import classNames from 'classnames/bind';
 
-import * as searchServices from '~/apiServices/searchServices';
+import * as request from '~/utils/request';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import AccountItem from '~/components/AccountItem';
 import { SearchIcon } from '~/components/Icons';
@@ -19,27 +19,32 @@ function Search() {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
 
-    const debounced = useDebounce(searchValue, 500);
+    const debouncedValue = useDebounce(searchValue, 500);
 
     const inputRef = useRef();
 
     useEffect(() => {
-        if (!debounced.trim()) {
+        if (!debouncedValue.trim()) {
             setSearchResult([]);
             return;
         }
-
-        const fetchApi = async () => {
-            setLoading(true);
-
-            const result = await searchServices.search(debounced);
-
-            setSearchResult(result);
-            setLoading(false);
-        };
-
-        fetchApi();
-    }, [debounced]);
+        setLoading(true);
+        request
+            .get(`users/search`, {
+                params: {
+                    q: debouncedValue,
+                    type: 'less',
+                },
+            })
+            .then((res) => {
+                setSearchResult(res.data);
+                setLoading(false);
+            })
+            .catch((error) => {
+                setLoading(false);
+            });
+    }, [debouncedValue]);
+    console.log(1);
 
     const handleClear = () => {
         setSearchValue('');
@@ -63,7 +68,7 @@ function Search() {
         // this by creating a new parentNode context.
         <div>
             <HeadlessTippy
-                interactive
+                // interactive
                 visible={showResult && searchResult.length > 0}
                 render={(attrs) => (
                     <div className={cx('search-result')} tabIndex="-1" {...attrs}>

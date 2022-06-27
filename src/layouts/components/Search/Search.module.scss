@@ -6,7 +6,8 @@
 .search {
     position: relative;
     height: var(--search-height);
-    padding-left: 16px;
+    padding-left: 14px;
+    padding-bottom: 2px;
     display: flex;
     background-color: rgba(22, 24, 35, 0.06);
     border-radius: var(--search-border-radius);
@@ -20,20 +21,11 @@
         caret-color: var(--primary);
         background-color: transparent;
         font-family: var(--font-family);
+        padding-right: 40px;
     }
 
     input:not(:placeholder-shown) ~ .search-btn {
         color: rgba(22, 24, 35, 0.75);
-    }
-
-    &::after {
-        content: '';
-        position: absolute;
-        top: var(--search-top-spacer);
-        right: var(--search-button-width);
-        width: 1px;
-        height: calc(var(--search-height) - var(--search-top-spacer) * 2);
-        background-color: rgba(22, 24, 35, 0.12);
     }
 
     &:focus-within {
@@ -76,10 +68,21 @@
     justify-content: center;
     width: var(--search-button-width);
     height: 100%;
+    padding-top: 1px;
     border-top-right-radius: var(--search-border-radius);
     border-bottom-right-radius: var(--search-border-radius);
     font-size: 1.8rem;
     color: rgba(22, 24, 35, 0.34);
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: var(--search-top-spacer);
+        right: calc(var(--search-button-width) - 2px);
+        width: 1px;
+        height: calc(var(--search-height) - var(--search-top-spacer) * 2);
+        background-color: rgba(22, 24, 35, 0.12);
+    }
 
     &:hover {
         cursor: pointer;
